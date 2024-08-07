@@ -132,7 +132,7 @@ function calculateCosts() {
 
     let tempCosts = WeekCosts + WeekendCosts;
 
-    if (Costs > tempCosts) {
+    if (Costs >= tempCosts) {
         Costs = tempCosts;
         description = tempDesc_WEEK + "<br><br>" + tempDesc_WEEKEND
     } else {

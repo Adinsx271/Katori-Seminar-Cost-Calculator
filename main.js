@@ -164,7 +164,7 @@ function calculateCosts() {
     if (flag_discount) {
         let discount = roundTo(Costs*0.15,2)
         Costs = Costs - discount
-        description += "<br><br> -You get a discount of 15 % on the total seminar cost <br> this amounts to: -" + discount + " €" 
+        description += "<br><br> -You get a discount of 15 % on the total seminar cost <br> this amounts to: -" + roundTo(discount,2) + " €" 
     }
 
     displayCosts(Costs, WeekendCosts);

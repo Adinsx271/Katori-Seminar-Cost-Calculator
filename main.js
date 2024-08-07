@@ -201,7 +201,7 @@ function calculateMaxCosts() {
 }
 
 function displayCosts(SeminarCosts, WECosts) {
-    document.getElementById('costsTxt').innerHTML = "Costs: " + roundTo(SeminarCosts,2).toFixed(2) + " €";
+    document.getElementById('costsTxt').innerHTML = "<b>Costs: " + roundTo(SeminarCosts,2).toFixed(2) + " €</b>";
 }
 
 function convertListToMatrix() {

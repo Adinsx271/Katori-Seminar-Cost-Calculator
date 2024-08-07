@@ -124,7 +124,7 @@ function calculateCosts() {
     let flatRateSeminar = false;
     let flagWeek_WE_combined = false;
 
-    if (WeekendCosts >= maxWeekendCosts) {
+    if (WeekendCosts >= maxWeekendCosts && WeekendCosts > 0) {
         WeekendCosts = maxWeekendCosts;
         flatRateWE = true;
         tempDesc_WEEKEND = "-Single trainings Cost exceeds flat rate for whole Weekend <br> Cost for whole Weekend is: " + WeekendCosts + ",00 €";

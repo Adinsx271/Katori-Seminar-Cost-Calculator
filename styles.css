@@ -16,3 +16,14 @@ th, td {
 .toggle-button.active {
     background-color: lightgreen;
 }
+
+.discount-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.discount-button.active {
+    background-color: lightgreen;
+
+}

@@ -143,18 +143,16 @@ function calculateCosts() {
     if (Costs >= maxSeminarCosts) {
         Costs = maxSeminarCosts;
         flatRateSeminar = true;
-
-        description = "-Single trainings Cost exceeds flat rate for whole seminar <br> Cost for whole seminar is: " + Costs + ",00 €"
+        if (Costs != 0) {
+            description = "-Single trainings Cost exceeds flat rate for whole seminar <br> Cost for whole seminar is: " + Costs + ",00 €"
+        }
     }
 
     if (inputArray[3][1]) { 
         Costs += 25; 
         description += "<br><br> -Additional 25,00 € for 5. dan kodansha training"
     }
-    if (inputList[16]) { 
-        Costs += 19; 
-        description += "<br><br> -Additional 19,00 € for visit of the Samurai Museum"
-    }
+
 
     //Catch special case if only 5.Dan Kodansha + 2 30€ Trainings 
     if (Costs === 85 && inputArray[3][1]) {
@@ -164,7 +162,12 @@ function calculateCosts() {
     if (flag_discount) {
         let discount = roundTo(Costs*0.15,2)
         Costs = Costs - discount
-        description += "<br><br> -You get a discount of 15 % on the total seminar cost <br> this amounts to: -" + discount.toFixed(2) + " €" 
+        description += "<br><br> -You get a discount of 15 % on the total seminar cost (except Samurai Museum)<br> this amounts to: -" + discount.toFixed(2) + " €" 
+    }
+
+    if (inputList[16]) { 
+        Costs += 19; 
+        description += "<br><br> -Additional 19,00 € for visit of the Samurai Museum"
     }
 
     displayCosts(Costs, WeekendCosts);
@@ -201,7 +204,7 @@ function calculateMaxCosts() {
 }
 
 function displayCosts(SeminarCosts, WECosts) {
-    document.getElementById('costsTxt').innerHTML = "<b>Costs: " + roundTo(SeminarCosts,2).toFixed(2) + " €</b>";
+    document.getElementById('costsTxt').innerHTML = "<b>Total cost: " + roundTo(SeminarCosts,2).toFixed(2) + " €";
 }
 
 function convertListToMatrix() {

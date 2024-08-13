@@ -45,10 +45,7 @@ function calculateCosts() {
     let stackOfTrainingsALL = [];
 
     //Variables to generate the description of the Cost Calculation 
-    let description = "Something went wrong"
-    let counter3Trainings = 0
-    let counterSingleTrainingsYu = 0
-    let counterSingleTrainingsKo = 0
+    let description = "Something went wrong" //default value
 
     let maxSeminarCosts = calculateMaxCosts()[0];
     let maxWeekendCosts = calculateMaxCosts()[1];
@@ -64,7 +61,7 @@ function calculateCosts() {
     }
     let tempDesc_WEEK = ""
     stackOfTrainingsWEEK.sort((a, b) => b - a);
-    while (stackOfTrainingsWEEK.length >= 3 && arraySum(stackOfTrainingsWEEK.slice(0, 3)) > 80) {
+    while (stackOfTrainingsWEEK.length >= 3 && arraySum(stackOfTrainingsWEEK.slice(0, 3)) >= 80) {
         stackOfTrainingsWEEK.splice(0, 3);
         WeekCosts += 80;
         tempDesc_WEEK += "<br><br> +80.00 € for a set of 3 trainings";
@@ -85,7 +82,7 @@ function calculateCosts() {
     }
     let tempDesc_WEEKEND = ""
     stackOfTrainingsWEEKEND.sort((a, b) => b - a);
-    while (stackOfTrainingsWEEKEND.length >= 3 && arraySum(stackOfTrainingsWEEKEND.slice(0, 3)) > 80) {
+    while (stackOfTrainingsWEEKEND.length >= 3 && arraySum(stackOfTrainingsWEEKEND.slice(0, 3)) >= 80) {
         stackOfTrainingsWEEKEND.splice(0, 3);
         WeekendCosts += 80;
         tempDesc_WEEKEND += "<br><br> +80.00 € for a set of 3 trainings"
@@ -107,7 +104,7 @@ function calculateCosts() {
     }
     let tempDesc_ALL = ""
     stackOfTrainingsALL.sort((a, b) => b - a);
-    while (stackOfTrainingsALL.length >= 3 && arraySum(stackOfTrainingsALL.slice(0, 3)) > 80) {
+    while (stackOfTrainingsALL.length >= 3 && arraySum(stackOfTrainingsALL.slice(0, 3)) >= 80) {
         stackOfTrainingsALL.splice(0, 3);
         Costs += 80;
         tempDesc_ALL += "<br><br> +80.00 € for a set of 3 trainings"
@@ -127,14 +124,14 @@ function calculateCosts() {
     if (WeekendCosts >= maxWeekendCosts && WeekendCosts > 0) {
         WeekendCosts = maxWeekendCosts;
         flatRateWE = true;
-        tempDesc_WEEKEND = "-Single trainings Cost exceeds flat rate for whole Weekend <br> Cost for whole Weekend is: " + WeekendCosts + ",00 €";
+        tempDesc_WEEKEND = "<br><br>-Single trainings Cost exceeds flat rate for whole Weekend <br> Cost for whole Weekend is: " + WeekendCosts + ",00 €";
     }
 
     let tempCosts = WeekCosts + WeekendCosts;
 
     if (Costs >= tempCosts) {
         Costs = tempCosts;
-        description = tempDesc_WEEK + "<br><br>" + tempDesc_WEEKEND
+        description = tempDesc_WEEK + tempDesc_WEEKEND
     } else {
         flagWeek_WE_combined = true;
         description = tempDesc_ALL
@@ -144,7 +141,7 @@ function calculateCosts() {
         Costs = maxSeminarCosts;
         flatRateSeminar = true;
         if (Costs != 0) {
-            description = "-Single trainings Cost exceeds flat rate for whole seminar <br> Cost for whole seminar is: " + Costs + ",00 €"
+            description = "<br><br>-Single trainings Cost exceeds flat rate for whole seminar <br> Cost for whole seminar is: " + Costs + ",00 €"
         }
     }
 
@@ -154,7 +151,7 @@ function calculateCosts() {
     }
 
 
-    //Catch special case if only 5.Dan Kodansha + 2 30€ Trainings 
+    //Catch special case if only 5.Dan Kodansha + 2x 30€ Trainings 
     if (Costs === 85 && inputArray[3][1]) {
         Costs = 80;
     }
@@ -175,13 +172,13 @@ function calculateCosts() {
 
 
 
-    //Debug Console...
+/*     //Debug to console...
     console.log("Flatrate Weekend: " + flatRateWE 
         + "\n" + "Flatrate Seminar: " + flatRateSeminar 
         + "\n" + "whole Week calculated together: " + flagWeek_WE_combined
         + "\n" + "Kodansha Training: " + inputArray[3][1]
         + "\n" + "Samurai Museum: " + inputList[16]
-    );
+    ); */
 }
 
 function calculateMaxCosts() {
@@ -203,7 +200,7 @@ function calculateMaxCosts() {
     return [maxSeminarCosts, maxWeekendCosts];
 }
 
-function displayCosts(SeminarCosts, WECosts) {
+function displayCosts(SeminarCosts) {
     document.getElementById('costsTxt').innerHTML = "<b>Total cost: " + roundTo(SeminarCosts,2).toFixed(2) + " €";
 }
 

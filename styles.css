@@ -13,8 +13,16 @@ th, td {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+.toggle-button[data-color] {
+    background-color: lightgoldenrodyellow;
+}
 .toggle-button.active {
     background-color: lightgreen;
+}
+
+.toggle-button.active[data-color] {
+    background-color: green;
 }
 
 .discount-button {
@@ -26,4 +34,33 @@ th, td {
 .discount-button.active {
     background-color: lightgreen;
 
+}
+
+.legende-div {
+    position: absolute;
+    width: 550px;
+
+    border: 2px solid black;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px; ;
+}
+
+.legende-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button, .button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    color: black !important;
+}
+
+button:active, .button.active,
+button:focus, .button:focus{
+    color: black !important;
 }
